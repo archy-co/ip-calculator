@@ -1,3 +1,8 @@
+'''
+IP Calc
+https://github.com/archy-co/lab2_task1https://github.com/archy-co/lab2_task1
+'''
+
 def get_ip_from_raw_address(raw_address):
     '''
     Returns ip address from raw_address
@@ -83,9 +88,8 @@ def get_first_usable_ip_address_from_raw_address(raw_address):
     >>> get_first_usable_ip_address_from_raw_address('91.124.230.205/30')
     '91.124.230.205'
     '''
-    binary_ip = to_binary_ip_address(get_ip_from_raw_address(raw_address))[:-1] + '1'
+    binary_ip = to_binary_ip_address(get_network_address_from_raw_address(raw_address))[:-1] + '1'
     return to_decimal_ip_address(binary_ip)
-
 
 
 def get_penultimate_usable_ip_address_from_raw_address(raw_address):
@@ -109,9 +113,7 @@ def get_number_of_usable_hosts_from_raw_address(raw_address):
     >>> get_number_of_usable_hosts_from_raw_address('91.124.230.205/30')
     2
     '''
-    first = get_first_usable_ip_address_from_raw_address(raw_address)
-    broadcast = get_broadcast_address_from_raw_address(raw_address)
-    return int(broadcast.split('.')[-1]) - int(first.split('.')[-1])
+    return 2**(32-int(raw_address.split('/')[1]))-2
 
 
 def get_ip_class_from_raw_address(raw_address):
@@ -178,6 +180,6 @@ def check_private_ip_address_from_raw_address(raw_address: str) -> bool:
 if __name__ == '__main__':
     import doctest
     doctest.testmod()
+    print(get_number_of_usable_hosts_from_raw_address("192.168.10.10/16"))
     print(get_number_of_usable_hosts_from_raw_address("230.250.33.233/13"))
-    print(get_first_usable_ip_address_from_raw_address("230.250.33.233/13"))
-    print(get_network_address_from_raw_address("192.168.10.10/16"))
+
