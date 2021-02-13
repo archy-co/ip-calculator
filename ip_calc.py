@@ -1,11 +1,11 @@
 '''
-IP Calc
+IP Calculator
 https://github.com/archy-co/lab2_task1https://github.com/archy-co/lab2_task1
 '''
 
 def get_ip_from_raw_address(raw_address):
     '''
-    Returns ip address from raw_address
+    Returns ip address from raw_address, without mask
     >>> get_ip_from_raw_address('192.127.255.10/32')
     '192.127.255.10'
     '''
@@ -14,7 +14,7 @@ def get_ip_from_raw_address(raw_address):
 
 def get_network_address_from_raw_address(raw_address):
     '''
-    Returns network address from raw_address
+    Returns network address having as input raw_address
     >>> get_network_address_from_raw_address('91.124.230.205/30')
     '91.124.230.204'
     '''
@@ -42,7 +42,7 @@ def to_decimal_ip_address(binary_ip):
 
 def get_broadcast_address_from_raw_address(raw_address):
     '''
-    Returns broadcast address
+    Returns ip's broadcast address
     >>> get_broadcast_address_from_raw_address('91.124.230.205/30')
     '91.124.230.207'
     '''
@@ -59,7 +59,7 @@ def get_broadcast_address_from_raw_address(raw_address):
 
 def get_binary_mask_from_raw_address(raw_address):
     '''
-    Returns binary interpretation of mask from raw_address
+    Returns binary interpretation of mask having raw_address
 
     >>> get_binary_mask_from_raw_address('91.124.230.205/30')
     '11111111.11111111.11111111.11111100'
@@ -109,7 +109,7 @@ def get_penultimate_usable_ip_address_from_raw_address(raw_address):
 
 def get_number_of_usable_hosts_from_raw_address(raw_address):
     '''
-    Returns number of usable hosts
+    Returns total number of usable hosts for raw_address
     >>> get_number_of_usable_hosts_from_raw_address('91.124.230.205/30')
     2
     '''
@@ -118,7 +118,7 @@ def get_number_of_usable_hosts_from_raw_address(raw_address):
 
 def get_ip_class_from_raw_address(raw_address):
     '''
-    Returns ip class as capital latin letter
+    Returns ip class as capital latin letter ('A', 'B', 'C', 'D' or 'E')
     >>> get_ip_class_from_raw_address('173.199.231.74')
     'B'
     '''
@@ -139,7 +139,8 @@ def get_ip_class_from_raw_address(raw_address):
 
 def to_binary(num: int) -> str:
     '''
-    Transfroms num to binary number length 8
+    Transfroms num to binary number length 8. Hence numer should be in range
+    from 0 to 255 inclusive
     '''
     bin_num = bin(num).split('b')[1]
     while len(bin_num) < 8:
@@ -161,7 +162,7 @@ def to_binary_ip_address(ip_address):
 
 def check_private_ip_address_from_raw_address(raw_address: str) -> bool:
     '''
-    Checks if ip address is private
+    Checks if ip address is private. Returns bool value
     >>> check_private_ip_address_from_raw_address('10.12.14.174/24')
     True
     >>> check_private_ip_address_from_raw_address('172.31.15.241/11')
@@ -180,6 +181,4 @@ def check_private_ip_address_from_raw_address(raw_address: str) -> bool:
 if __name__ == '__main__':
     import doctest
     doctest.testmod()
-    print(get_number_of_usable_hosts_from_raw_address("192.168.10.10/16"))
-    print(get_number_of_usable_hosts_from_raw_address("230.250.33.233/13"))
 
